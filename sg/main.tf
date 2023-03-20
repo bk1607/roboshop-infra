@@ -1,5 +1,6 @@
+
 resource "aws_security_group" "sg" {
-  name        = "${var.component}-dev-sg"
+  name        = "example-sg"
   description = "Allow TLS inbound traffic"
 
   ingress {
