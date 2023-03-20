@@ -4,13 +4,10 @@ data "aws_ami" "ami" {
   owners = ["973714476881"]
 }
 
-data "aws_security_group" "id" {
-  name = "${var.component}-${var.env}-sg"
-}
 resource "aws_instance" "ec2" {
   ami = data.aws_ami.ami.image_id
   instance_type = var.type
-  security_groups = [data.aws_security_group.id]
+  security_groups = []
   tags = {
     Name = var.component
   }
