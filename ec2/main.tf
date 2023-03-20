@@ -7,13 +7,13 @@ data "aws_ami" "ami" {
 resource "aws_instance" "ec2" {
   ami = data.aws_ami.ami.image_id
   instance_type = var.type
-  security_groups = [aws_security_group.allow_tls.id]
+  security_groups = [aws_security_group.sg.id]
   tags = {
     Name = var.component
   }
 }
 
-resource "aws_security_group" "allow_tls" {
+resource "aws_security_group" "sg" {
   name        = "${var.component}-${var.env}-sg"
   description = "Allow TLS inbound traffic"
 
