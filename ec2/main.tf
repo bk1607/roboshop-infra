@@ -5,7 +5,7 @@ data "aws_ami" "ami" {
 }
 
 data "aws_security_group" "id" {
-  Name = "${var.component}-${var.env}-sg"
+  name = "${var.component}-${var.env}-sg"
 }
 resource "aws_instance" "ec2" {
   ami = data.aws_ami.ami.image_id
