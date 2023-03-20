@@ -7,7 +7,7 @@ data "aws_ami" "ami" {
 resource "aws_instance" "ec2" {
   ami = data.aws_ami.ami.image_id
   instance_type = var.type
-  security_groups = [aws_security_group.allow_tls.id]
+  security_groups = [aws_security_group.allow_tls["${var.component}-${var.env}-sg"].id]
   tags = {
     Name = var.component
   }
