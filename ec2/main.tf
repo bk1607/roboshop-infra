@@ -7,7 +7,7 @@ resource "aws_instance" "ec2" {
 }
 
 resource "aws_security_group" "allow_tls" {
-  name        = "allow_tls"
+  name        = "${var.component}-${var.env}-sg"
   description = "Allow TLS inbound traffic"
 
   ingress {
@@ -27,7 +27,7 @@ resource "aws_security_group" "allow_tls" {
   }
 
   tags = {
-    Name = "allow_tls"
+    Name = "${var.component}-dev-sg"
   }
 }
 //resource "aws_route53_record" "records" {
