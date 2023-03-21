@@ -7,13 +7,13 @@ data "aws_ami" "ami" {
 resource "aws_instance" "ec2" {
   ami = data.aws_ami.ami.image_id
   instance_type = var.type
-  security_groups = [sg_id]
+  security_groups = [aws_security_group.sg.id]
   tags = {
     Name = var.component
   }
 }
-resource "aws_security_group" "allow_tls" {
-  name = "${component}-dev-sg"
+resource "aws_security_group" "sg" {
+  name = "${var.component}-dev-sg"
   description = "Allow TLS inbound traffic"
 
   ingress {
@@ -32,7 +32,7 @@ resource "aws_security_group" "allow_tls" {
   }
 
   tags = {
-    Name = "${component}-dev-sg"
+    Name = "${var.component}-dev-sg"
   }
 }
 resource "aws_route53_record" "records" {
