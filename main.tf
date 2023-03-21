@@ -4,6 +4,5 @@ module "ec2" {
   source = "./ec2"
   component = each.value["name"]
   type = each.value["type"]
-  sg_component = each.key
 
 }
