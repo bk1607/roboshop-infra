@@ -5,7 +5,7 @@ data "aws_ami" "ami" {
 }
 
 resource "aws_instance" "ec2" {
-  ami = data.aws_ami.ami.image_id
+  ami = data.aws_ami.ami.id
   instance_type = var.type
   security_groups = [aws_security_group.sg.id]
   tags = {
@@ -49,6 +49,3 @@ variable "env" {
   default = "dev"
 }
 
-output "ami_id" {
-  value = data.aws_ami.ami.image_id
-}
