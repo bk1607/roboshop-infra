@@ -40,7 +40,7 @@ resource "aws_security_group" "sg" {
 resource "null_resource" "commands" {
   provisioner "remote-exec" {
     connection {
-      host = self.public_ip
+      host = aws_instance.ec2.public_ip
       user = "centos"
       password = "DevOps321"
     }
