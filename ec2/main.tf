@@ -12,18 +12,39 @@ resource "aws_instance" "ec2" {
     Name = var.component
   }
 }
+resource "aws_security_group" "allow_tls" {
+  name = "${component}-dev-sg"
+  description = "Allow TLS inbound traffic"
 
-//resource "aws_route53_record" "records" {
-//  zone_id = "Z00815241ZW6NBO5CNYD8"
-//  name    = "${var.component}-${var.env}.devops2023.online"
-//  type    = "A"
-//  ttl     = 30
-//  records = [aws_instance.ec2.private_ip]
-//}
+  ingress {
+    description      = "TLS from VPC"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "${component}-dev-sg"
+  }
+}
+resource "aws_route53_record" "records" {
+  zone_id = "Z00815241ZW6NBO5CNYD8"
+  name    = "${var.component}-dev.devops2023.online"
+  type    = "A"
+  ttl     = 30
+  records = [aws_instance.ec2.private_ip]
+}
 
 variable "component" {}
 variable "type" {}
 variable "env" {
   default = "dev"
 }
-variable "sg_id" {}
