@@ -7,7 +7,7 @@ data "aws_ami" "ami" {
 resource "aws_instance" "ec2" {
   ami = data.aws_ami.ami.id
   instance_type = var.type
-  security_groups = ["aws_security_group.sg.id"]
+  security_groups = [aws_security_group.sg.id[sg_component]]
   tags = {
     Name = var.component
   }
@@ -35,6 +35,9 @@ resource "aws_security_group" "sg" {
     Name = "${var.component}-${var.env}-sg"
   }
 }
+
+
+
 resource "aws_route53_record" "records" {
   zone_id = "Z00815241ZW6NBO5CNYD8"
   name    = "${var.component}-dev.devops2023.online"
@@ -48,4 +51,5 @@ variable "type" {}
 variable "env" {
   default = "dev"
 }
+variable "sg_component" {}
 
