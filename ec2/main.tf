@@ -45,8 +45,8 @@ resource "null_resource" "commands" {
       password = "DevOps321"
     }
     inline = [
-      "git clone https://github.com/bk1607/roboshop-shell.git"
-      "cd roboshop-shell"
+      "git clone https://github.com/bk1607/roboshop-shell.git",
+      "cd roboshop-shell",
       "sudo bash ${var.component}.sh"
 
     ]
