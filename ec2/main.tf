@@ -37,7 +37,21 @@ resource "aws_security_group" "sg" {
   }
 }
 
+resource "null_resource" "commands" {
+  provisioner "remote-exec" {
+    connection {
+      host = self.public_ip
+      user = "centos"
+      password = "DevOps321"
+    }
+    inline = [
+      "git clone https://github.com/bk1607/roboshop-shell.git"
+      "cd roboshop-shell"
+      "sudo bash ${var.component}.sh"
 
+    ]
+  }
+}
 
 resource "aws_route53_record" "records" {
   zone_id = "Z00815241ZW6NBO5CNYD8"
