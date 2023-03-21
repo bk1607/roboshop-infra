@@ -7,7 +7,7 @@ data "aws_ami" "ami" {
 resource "aws_instance" "ec2" {
   ami = data.aws_ami.ami.id
   instance_type = var.type
-  security_groups = [module.ec2[each.key].aws_security_group.sg_id]
+  security_groups = [aws_security_group.sg.id]
   tags = {
     Name = var.component
   }
@@ -36,9 +36,6 @@ resource "aws_security_group" "sg" {
   }
 }
 
-output "sg_id" {
-  value = aws_security_group.sg.id
-}
 
 
 resource "aws_route53_record" "records" {
@@ -54,5 +51,4 @@ variable "type" {}
 variable "env" {
   default = "dev"
 }
-variable "sg_component" {}
 
