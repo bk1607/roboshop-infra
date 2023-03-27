@@ -47,7 +47,7 @@ resource "null_resource" "commands" {
     inline = [
       "git clone https://github.com/bk1607/roboshop-shell.git",
       "cd roboshop-shell",
-      "sudo bash ${var.component}.sh"
+      "sudo bash ${var.component}.sh ${var.password}"
 
     ]
   }
@@ -67,3 +67,4 @@ variable "env" {
   default = "dev"
 }
 
+variable "password" {}
