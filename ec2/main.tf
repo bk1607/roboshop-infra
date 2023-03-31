@@ -67,4 +67,3 @@ variable "env" {
   default = "dev"
 }
 
-variable "password" {}

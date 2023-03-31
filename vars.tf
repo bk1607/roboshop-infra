@@ -19,7 +19,6 @@ variable "instances" {
     rabbitmq = {
       name = "rabbitmq"
       type = "t3.micro"
-      password = "roboshop123"
     }
     user = {
       name = "user"
@@ -32,18 +31,15 @@ variable "instances" {
     mysql = {
       name = "mysql"
       type = "t3.micro"
-      password = "Roboshop@1"
     }
     payment = {
       name = "payment"
       type = "t3.micro"
-      password = "roboshop123"
 
     }
     shipping = {
       name = "shipping"
       type = "t3.micro"
-      password = "Roboshop@1"
     }
   }
 }
