@@ -1,7 +1,3 @@
-variable "parameters" {
-  default = {
-    name = "test"
-    value = "hello universe"
-    type  = "String"
-  }
-}
+parameters = [
+{ name = "test", value = "hello universe", type = "String"}
+]
