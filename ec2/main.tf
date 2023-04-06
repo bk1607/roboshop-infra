@@ -39,7 +39,7 @@ resource "null_resource" "commands" {
       password = "DevOps321"
     }
     inline = [
-     "ansible-pull -i localhost, -U https://github.com/bk1607/ansible-roboshop roboshop.yml -e role_name=${var.component}"
+     "ansible-pull -i localhost, -U https://github.com/bk1607/ansible-roboshop roboshop.yml -e role_name=${var.component} -e env=${var.env}"
     ]
 
   }
