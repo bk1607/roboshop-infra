@@ -19,7 +19,7 @@ parameters = [
   { name = "dev.user.mongo", value = "true", type = "String"},
   { name = "dev.user.redis_host", value = "redis-dev.devops2023.online", type = "String"},
   { name = "dev.user.mongodb_url", value = "mongodb://mongodb-dev.devops2023.online:27017/users", type = "String"},
-  { name = "dev.shipping.mysql_host", value = "mysql-dev.devops2023.online:8080", type = "String"},
+  { name = "dev.shipping.mysql_host", value = "mysql-dev.devops2023.online", type = "String"},
 
 
 ]
