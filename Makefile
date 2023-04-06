@@ -1,3 +1,2 @@
-dev-apply:
-	echo dev-apply
-
+git:
+	git pull
