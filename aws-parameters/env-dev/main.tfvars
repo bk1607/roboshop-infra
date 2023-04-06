@@ -28,4 +28,5 @@ secrets = [
   { name = "dev.mysql.mysql_pass", value = "Roboshop@1", type = "SecureString"},
   { name = "dev.rabbitmq.amqp_user", value = "roboshop", type = "SecureString"},
   { name = "dev.rabbitmq.amqp_pass", value = "roboshop123", type = "SecureString"},
+  { name = "dev.shipping.mysql_pass", value = "Roboshop@1", type = "SecureString"},
 ]
