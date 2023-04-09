@@ -1,36 +1,37 @@
-resource "aws_spot_instance_request" "ec2" {
-  ami           = data.aws_ami.ami.id
-  instance_type = var.type
-  vpc_security_group_ids = [aws_security_group.sg.id]
-  iam_instance_profile = "${var.env}-${var.component}-role"
-  spot_type = "persistent"
-  instance_interruption_behavior = "stop"
-  wait_for_fulfillment = true
-  tags = {
-    Name = var.component
-  }
-
-}
-resource "aws_ec2_tag" "tag1" {
-  resource_id = aws_spot_instance_request.ec2.id
-  key         = "Name"
-  value       = var.component
-}
-resource "aws_ec2_tag" "tag2" {
-  resource_id = aws_spot_instance_request.ec2.id
-  key         = "Monitor"
-  value       = var.Monitor
-}
-
-#resource "aws_instance" "ec2" {
-#  ami = data.aws_ami.ami.id
+#resource "aws_spot_instance_request" "ec2" {
+#  ami           = data.aws_ami.ami.id
 #  instance_type = var.type
 #  vpc_security_group_ids = [aws_security_group.sg.id]
 #  iam_instance_profile = "${var.env}-${var.component}-role"
+#  spot_type = "persistent"
+#  instance_interruption_behavior = "stop"
+#  wait_for_fulfillment = true
 #  tags = {
 #    Name = var.component
 #  }
+#
 #}
+#resource "aws_ec2_tag" "tag1" {
+#  resource_id = aws_spot_instance_request.ec2.id
+#  key         = "Name"
+#  value       = var.component
+#}
+#resource "aws_ec2_tag" "tag2" {
+#  resource_id = aws_spot_instance_request.ec2.id
+#  key         = "Monitor"
+#  value       = var.Monitor
+#}
+
+resource "aws_instance" "ec2" {
+  ami = data.aws_ami.ami.id
+  instance_type = var.type
+  vpc_security_group_ids = [aws_security_group.sg.id]
+  iam_instance_profile = "${var.env}-${var.component}-role"
+  tags = {
+    Name = var.component
+    Monitor = var.Monitor
+  }
+}
 resource "aws_security_group" "sg" {
   name = "${var.component}-${var.env}-sg"
   description = "Allow TLS inbound traffic"
@@ -58,7 +59,7 @@ resource "aws_security_group" "sg" {
 resource "null_resource" "commands" {
   provisioner "remote-exec" {
     connection {
-      host = aws_spot_instance_request.ec2.public_ip
+      host = aws_instance.ec2.public_ip
       user = "centos"
       password = "DevOps321"
     }
@@ -74,7 +75,7 @@ resource "aws_route53_record" "records" {
   name    = "${var.component}-${var.env}.devops2023.online"
   type    = "A"
   ttl     = 30
-  records = [aws_spot_instance_request.ec2.private_ip]
+  records = [aws_instance.ec2.private_ip]
 }
 
 resource "aws_iam_policy" "ssm-policy" {
