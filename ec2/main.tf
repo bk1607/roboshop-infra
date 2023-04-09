@@ -10,12 +10,17 @@ resource "aws_spot_instance_request" "ec2" {
     Name = var.component
   }
 
-  instance_tags = {
-    Name        = var.component
-    Monitor     = var.Monitor
-  }
 }
-
+resource "aws_ec2_tag" "instances" {
+  resource_id = aws_spot_instance_request.ec2.id
+  key         = "Name"
+  value       = var.component
+}
+resource "aws_ec2_tag" "instances" {
+  resource_id = aws_spot_instance_request.ec2.id
+  key         = "Monitor"
+  value       = var.Monitor
+}
 
 #resource "aws_instance" "ec2" {
 #  ami = data.aws_ami.ami.id
