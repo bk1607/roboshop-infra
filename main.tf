@@ -5,5 +5,5 @@ module "ec2" {
   component = each.value["name"]
   type = each.value["type"]
   env = var.env
-  Monitor = var.Monitor
+  Monitor = each.value["Monitor"]
 }
