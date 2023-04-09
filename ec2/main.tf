@@ -11,12 +11,12 @@ resource "aws_spot_instance_request" "ec2" {
   }
 
 }
-resource "aws_ec2_tag" "instances" {
+resource "aws_ec2_tag" "tag1" {
   resource_id = aws_spot_instance_request.ec2.id
   key         = "Name"
   value       = var.component
 }
-resource "aws_ec2_tag" "instances" {
+resource "aws_ec2_tag" "tag2" {
   resource_id = aws_spot_instance_request.ec2.id
   key         = "Monitor"
   value       = var.Monitor
