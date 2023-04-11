@@ -57,6 +57,7 @@ resource "aws_security_group" "sg" {
 }
 
 resource "null_resource" "commands" {
+  depends_on = [aws_route53_record.records]
   provisioner "remote-exec" {
     connection {
       host = aws_instance.ec2.public_ip
