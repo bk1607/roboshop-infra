@@ -6,12 +6,12 @@ instances = {
   }
   catalogue = {
     name = "catalogue"
-    type = "t3.micro"
+    type = "t3.small"
     Monitor = "yes"
   }
   user = {
     name = "user"
-    type = "t3.micro"
+    type = "t3.small"
     Monitor = "yes"
   }
   cart = {
@@ -21,7 +21,7 @@ instances = {
   }
   shipping = {
     name = "shipping"
-    type = "t3.micro"
+    type = "t3.small"
     Monitor = "yes"
   }
   payment = {
